@@ -1,0 +1,240 @@
+/* Background positioning */
+/* Connecting dots background */
+.connecting-dots {
+    background-color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Ensure content is positioned above the background */
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+/* Add some subtle transparency to content elements to allow background to show through */
+.form-container, .terminal-container {
+    position: relative;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjust opacity as needed */
+}
+
+/* Enhance terminal for better visibility over background */
+.terminal {
+    background-color: rgba(0, 0, 0, 0.113);
+    position: relative;
+    z-index: 10;
+}
+
+/* For demo-11 specific styles */
+
+        body {
+            font-family: 'Consolas', 'Monaco', monospace;
+
+            color: rgba(51, 255, 0, 0.85);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-weight: 300;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .terminal-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .terminal {
+            background-color: transparent;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            font-size: 14px;
+            line-height: 1.6;
+            height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid rgba(51, 255, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .terminal pre {
+            margin: 0;
+            color: rgba(51, 255, 0, 0.85);
+        }
+        
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(51, 255, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        input, select, button {
+            background-color: rgba(30, 30, 30, 0.7);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(51, 255, 0, 0.3);
+            padding: 10px 15px;
+            margin-right: 10px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            border-color: rgba(51, 255, 0, 0.6);
+            outline: none;
+            box-shadow: 0 0 5px rgba(51, 255, 0, 0.3);
+        }
+        
+        button {
+            cursor: pointer;
+            background-color: rgba(20, 120, 20, 0.6);
+            border: none;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            background-color: rgba(30, 150, 30, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .status-box {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-size: 13px;
+        }
+        
+        .status-excellent {
+            background-color: rgba(0, 255, 0, 0.15);
+            color: rgba(0, 255, 0, 0.9);
+        }
+        
+        .status-good {
+            background-color: rgba(170, 255, 0, 0.15);
+            color: rgba(170, 255, 0, 0.9);
+        }
+        
+        .status-fair {
+            background-color: rgba(255, 170, 0, 0.15);
+            color: rgba(255, 170, 0, 0.9);
+        }
+        
+        .status-poor, .status-unstable {
+            background-color: rgba(255, 51, 0, 0.15);
+            color: rgba(255, 51, 0, 0.9);
+        }
+        
+        .status-uncertain {
+            background-color: rgba(170, 170, 170, 0.15);
+            color: rgba(170, 170, 170, 0.9);
+        }
+        
+        .highlight-alert {
+            color: rgba(255, 51, 0, 0.9);
+        }
+        
+        /* Input form styling */
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .form-row .input-group {
+            flex: 1;
+            margin-right: 15px;
+            min-width: 200px;
+        }
+        
+        .form-row .input-group:last-child {
+            margin-right: 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .btn-group button {
+            min-width: 120px;
+            margin: 0 10px;
+        }
+
+        .clear-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .clear-btn:active {
+            background-color: #990000;
+        }

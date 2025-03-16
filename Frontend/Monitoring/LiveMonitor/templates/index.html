@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/realtime.css') }}">
+</head>
+<body class="demo-11">
+    <div id="connecting-dots" class="connecting-dots">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="container">
+        <h1>NETWORK MONITOR</h1>
+        
+        <div class="form-container">
+            <form method="POST" action="/" id="monitor-form">
+                <div class="mode-selector">
+                    <label for="display-mode">Display Mode:</label>
+                    <div class="toggle-container">
+                        <input type="radio" id="realtime-mode" name="mode" value="realtime" checked>
+                        <label for="realtime-mode">Real-Time</label>
+                        <input type="radio" id="standard-mode" name="mode" value="standard">
+                        <label for="standard-mode">Standard</label>
+                        <input type="radio" id="full-monitor-mode" name="mode" value="full">
+                        <label for="full-monitor-mode">Full Monitor</label>
+                    </div>
+                    <div id="mode-description" class="mode-description">
+                        <p>Real-Time Mode: Monitor a single server with live updates. See ping times, jitter, and network performance as they happen. Best for detailed analysis of a specific connection.</p>
+                    </div>
+                </div>
+                
+                <div class="form-row" id="server-input-group">
+                    <div class="input-group">
+                        <label for="server">Server Address or IP</label>
+                        <input type="text" id="server" name="server" placeholder="e.g., 8.8.8.8, google.com" value="{{ request.form.get('server', '') }}" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="count">Packet Count</label>
+                        <input type="number" id="count" name="count" placeholder="Number of packets" value="{{ request.form.get('count', 10) }}" min="1" max="100" required>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" id="start-btn">Start Monitoring</button>
+                    <button type="button" id="clear-logs-btn" class="clear-btn">Clear Logs</button>
+                </div>
+                
+                {% if error %}
+                <p class="highlight-alert" style="text-align: center; margin-top: 15px;">{{ error }}</p>
+                {% endif %}
+                
+                <!-- Status indicator for real-time mode -->
+                <div id="realtime-status" style="display: none;">
+                    <div class="status-container">
+                        <div class="status-indicator">
+                            <span class="status-dot connecting"></span>
+                            <span id="status-text">Connecting...</span>
+                        </div>
+                        <button type="button" id="stop-btn" class="stop-btn">Stop</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="terminal-container">
+            <div class="terminal" id="main-terminal">
+                <pre id="terminal-content">
+{% if results %}
+// Network Monitoring Results
+// Server: {{ server }}
+// Packets: {{ count }}
+// Time: {{ current_time }}
+// -----------------------------------------------
+
+{% for result in results %}
+{{ result }}
+{% endfor %}
+
+{% if logs %}
+// Abnormal Events Log
+// -----------------------------------------------
+{% for log in logs %}
+{{ log }}
+{% endfor %}
+{% endif %}
+{% else %}
+// Network Monitor Ready
+// -----------------------------------------------
+
+Please enter a server address or IP above and click
+"Start Monitoring" to begin the network analysis.
+
+The best servers that you can monitor:
+// -----------------------------------------------
+{% for server in server_list %}
+{% if server.address != "Could not detect second-hop IP." and server.address != "Error detecting second-hop IP." %}
+{{ server.address }} ({{ server.description }})
+{% endif %}
+{% endfor %}
+
+The monitor will analyze ping times, jitter, and
+network throughput to evaluate connection quality.
+
+Note: "Real-Time" mode shows results as they happen.
+"Standard" mode shows all results after completion.
+{% endif %}
+                </pre>
+            </div>
+            <div id="multi-terminal-container" class="multi-terminal-container" style="display: none;">
+                <!-- Dynamically populated terminals will go here -->
+            </div>
+            <div id="unified-log-container" class="unified-log-container" style="display: none;">
+                <div class="unified-log-header">
+                    <span>Abnormal Events Log (All Servers)</span>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Monitoring...</span>
+                    </div>
+                </div>
+                <div class="unified-log-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/lib/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/TweenLite.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/EasePack.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/realtime.js') }}"></script>
+
+</body>
+</html>
