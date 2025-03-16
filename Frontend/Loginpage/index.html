@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PTE Net Tools</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/9ba602d7e1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="area">
+    <!-- Animated background elements -->
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    
+    <!-- Login container -->
+    <div class="insert-box">
+      <!-- Branding -->
+      <img src="pishgaman.png" class="logo" alt="Pishgaman Logo">
+      <h1 class="title-text">Pishgaman Tosee Ertebatat</h1>
+      <img src="5g.png" class="logo5g" alt="5G logo">
+      
+      <!-- Form elements -->
+      <div class="form-group">
+        <label for="username" class="input-label">شماره تلفن خود را وارد کنید</label>
+        <div class="input-with-icon">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="username" class="input-field" placeholder="Enter your phone number" pattern="[0-9]{10,12}" title="Please enter a valid phone number (10-12 digits)">
+        </div>
+        <div id="validation-message" class="validation-message"></div>
+      </div>
+      
+      <button id="submitBtn" class="glow-on-hover" type="button">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      
+      <div class="additional-options">
+        <a href="#" class="help-link"><i class="fas fa-question-circle"></i> Need help?</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load scripts -->
+  <script src="script.js"></script>
+  <script>
+    // Only include this if you're using Electron
+    if (typeof require !== 'undefined') {
+      const { ipcRenderer } = require('electron');
+      
+      document.getElementById('submitBtn').addEventListener('click', function() {
+        // Note: This is now handled in script.js handleLogin function
+        // ipcRenderer.send('show-window-2');
+      });
+    }
+  </script>
+</body>
+</html>
