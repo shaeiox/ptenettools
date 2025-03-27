@@ -5,7 +5,7 @@
       {
         "file": "discdataoverday.asar",
         "destination": "",
-        "url": "https://raw.githubusercontent.com/shaeiox/ptenettools/main/updates/discdataoverday.asar",
+        "url": "https://github.com/shaeiox/ptenettools/blob/main/updates/discdataoverday.asar",
         "description": "Updated ASAR archive with latest frontend files",
         "action": {
           "type": "restart"
